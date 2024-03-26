@@ -5,7 +5,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{{title}}</title>
+  <title>{{Pagetitle}}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="../../css/global.css" />
   <script src="https://cdn.tailwindcss.com"></script>
@@ -15,7 +15,7 @@
   <header class="py-8 px-4 mx-auto max-w-xl lg:py-16 lg:px-6">
     <div class="mx-auto text-center mb-8 lg:mb-16">
       <h2 class="mb-4 text-5xl tracking-light font-extrabold text-white">
-        {{title}}
+        {{Pagetitle}}
       </h2>
     </div>
     <nav
@@ -34,20 +34,24 @@
   </header>
   
   <div class="grid grid-cols-1 gap-10 w-3/4 mx-auto md:grid-cols-2 lg:grid-cols-3">
-    {{#books}}
-    <a href="/book/{{id}}"
+    {{#professors}}
+    <a href="/prfessor/{{id}}"
       class="rounded-lg border shadow-md bg-gray-800 border-gray-700 hover:scale-105 hover:bg-gray-700 hover:border-gray-500 transition flex flex-col">
       <header class="p-4 flex-grow">
         <h2 class="my-2 text-2xl font-bold tracking-tight Itext-white">
-          {{title}}
+          {{name}}
         </h2>
-        <p class="mb-4 font-light text-gray-400">{{author_name}}</p>
+        <p class="mb-4 font-light text-gray-400">{{degree}}</p>
         <div class="flex flex-row">
-          <span class="text-xs font-semibold mr-2 px-2.5 py-0.5 rounded bg-green-200 text-green-900">{{copyright}}</span>
-          <span class="text-xs font-semibold mr-2 px-2.5 py-0.5 rounded bg-green-200 text-green-900">{{edition}}</span>
+          <span class="text-xs font-semibold mr-2 px-2.5 py-0.5 rounded bg-green-200 text-green-900">{{email}}</span>
+          <span class="text-xs font-semibold mr-2 px-2.5 py-0.5 rounded bg-green-200 text-green-900">{{phone}}</span>
+          <span class="text-xs font-semibold mr-2 px-2.5 py-0.5 rounded bg-green-200 text-green-900">{{book_id}}</span>
         </div>
       </header>
     </a>
+    {{/professors}}
+    {{#books}}
+    <h4>{{title}} | {{id}}</h4>
     {{/books}}
   </div>
 </body>

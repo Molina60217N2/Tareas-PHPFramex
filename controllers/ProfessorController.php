@@ -6,9 +6,11 @@
   class ProfessorController extends Controller {
     
     public function index() {  
+      $books = DB::table('book') ->get();
       return view('professor/index',
        ['professors'=>Professor::all(),
-        'title'=>'Professors List']);
+        'Pagetitle'=>'Professors List',
+        'books'=>$books]);
     }
 
     public function show($id) {

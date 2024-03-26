@@ -20,7 +20,9 @@ require_once('./controllers/PublisherController.php');
     Route::get('/publishers','PublisherController@index');
     Route::get('/publisher/(:number)','PublisherController@show');
 
+    //TESTING ROUTES
 
+    Route::get('/professors','ProfessorController@index');
     
     Route::dispatch();
 ?>

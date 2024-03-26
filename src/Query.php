@@ -8,7 +8,7 @@ class Query {
 
   public $params = [];
 
-  public function itemWhere($relacional,$field,$operator,$value = NULL) {
+  public function itemWhere($relational,$field,$operator,$value = NULL) {
   	if ($value == NULL) {
   	  $value = $operator;
   	  $operator = '=';
