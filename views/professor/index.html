@@ -1,59 +1,38 @@
 <!DOCTYPE html>
 <!-- file: views/professor/index.html -->
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{{Pagetitle}}</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="../../css/global.css" />
-  <script src="https://cdn.tailwindcss.com"></script>
+<meta charset="utf-8">
+<title>{{title}}</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/normalize.css">
+<link rel="stylesheet" href="/css/skeleton.css">
 </head>
-
 <body>
-  <header class="py-8 px-4 mx-auto max-w-xl lg:py-16 lg:px-6">
-    <div class="mx-auto text-center mb-8 lg:mb-16">
-      <h2 class="mb-4 text-5xl tracking-light font-extrabold text-white">
-        {{Pagetitle}}
-      </h2>
+ <div class="container">
+  <div class="row">
+   <div style="margin-top: 10%">
+     <h2>{{title}}</h2>
+     <table><thead>
+      <tr><th>Name</th><th>Degree</th><th>Email</th>
+          <th>Phone</th><th>Actions</th></th></tr>
+      </thead><tbody>
+      {{#professors}}
+      <tr><td>{{name}}</td>
+      <td>{{degree}}</td>
+      <td>{{email}}</td>
+      <td>{{phone}}</td>
+      <td>
+      <a class="button" href="professor/{{id}}">Show</a>
+      <a class="button" href="professor/{{id}}/edit">Edit</a>
+      <a class="button" href="professor/{{id}}/delete">Erase</a>
+      </td>
+      </tr>
+      {{/professors}}</tbody>
+     </table>
+     <a class="button button-primary" href="/professor/create">New</a>
     </div>
-    <nav
-    class="flex flex-col items-center justify-between w-full text-center md:flex-row"
-  >
-    <a class="text-white font-bold" href="/">
-     Libros
-    </a>
-    <a class="text-white font-bold" href="/authors">
-      Autores
-    </a>
-    <a class="text-white font-bold" href="/publishers">
-      Editoriales
-    </a>
-  </nav>
-  </header>
-  
-  <div class="grid grid-cols-1 gap-10 w-3/4 mx-auto md:grid-cols-2 lg:grid-cols-3">
-    {{#professors}}
-    <a href="/prfessor/{{id}}"
-      class="rounded-lg border shadow-md bg-gray-800 border-gray-700 hover:scale-105 hover:bg-gray-700 hover:border-gray-500 transition flex flex-col">
-      <header class="p-4 flex-grow">
-        <h2 class="my-2 text-2xl font-bold tracking-tight Itext-white">
-          {{name}}
-        </h2>
-        <p class="mb-4 font-light text-gray-400">{{degree}}</p>
-        <div class="flex flex-row">
-          <span class="text-xs font-semibold mr-2 px-2.5 py-0.5 rounded bg-green-200 text-green-900">{{email}}</span>
-          <span class="text-xs font-semibold mr-2 px-2.5 py-0.5 rounded bg-green-200 text-green-900">{{phone}}</span>
-          <span class="text-xs font-semibold mr-2 px-2.5 py-0.5 rounded bg-green-200 text-green-900">{{book_id}}</span>
-        </div>
-      </header>
-    </a>
-    {{/professors}}
-    {{#books}}
-    <h4>{{title}} | {{id}}</h4>
-    {{/books}}
-  </div>
+   </div>
+ </div>
 </body>
-
-</html>

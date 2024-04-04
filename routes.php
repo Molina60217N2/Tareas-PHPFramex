@@ -22,7 +22,9 @@ require_once('./controllers/PublisherController.php');
 
     //TESTING ROUTES
 
-    Route::get('/professors','ProfessorController@index');
-    
+    Route::resource('professor', 'ProfessorController');
+    Route::get('/professor/(:number)/delete','ProfessorController@destroy');
+    Route::get('/professor/(:number)/edit','ProfessorController@edit');
+    Route::get('/professor/(:number)','ProfessorController@show');  
     Route::dispatch();
 ?>
