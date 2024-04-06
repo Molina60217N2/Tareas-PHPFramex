@@ -11,7 +11,7 @@ abstract class Controller {
   public function store($param1 = NULL) {}
   public function show($id) {}
   public function edit($id) {}
-  public function update($param1,$param2) {} //le quité lo de = null
+  public function update($param1,$param2 = NULL) {} //le quité lo de = null
   public function destroy($id) {}
 }
 ?>

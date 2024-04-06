@@ -12,16 +12,21 @@
     }
 
     public function show($id) {
+      // $book = DB::table('book')->find(3);
+      // // echo($book[0]['title']);
+
+      // // return;
       $prof = Professor::find($id);
       return view('professor/show',
         ['professor'=>$prof,
-         'title'=>'Professor Detail']);
+         'title'=>'Professor Detail',
+        'show'=>true, 'create'=>false, 'edit'=>false]);
     }
 
     public function create() {
       $prof = ['name'=>'','degree'=>'',
                'email'=>'','phone'=>''];
-    return view('professor/create',
+    return view('professor/show',
       ['title'=>'Professor Create',
       'professor'=>$prof,'courses'=>false,
       'show'=>false,'create'=>true,'edit'=>false]);
@@ -40,7 +45,7 @@
 
   public function edit($prof_id) {
     $prof = DB::table('professor')->find($prof_id);
-    return view('professor/edit',
+    return view('professor/show',
       ['professor'=>$prof,
        'title'=>'Professor Edit','courses'=>false,
        'show'=>false,'create'=>false,'edit'=>true]);
@@ -53,10 +58,12 @@
     $phone = Input::get('phone');
     $prof = ['name'=>$name,'degree'=>$degree,
              'email'=>$email,'phone'=>$phone];
-             echo($prof['degree']);
+             DB::table('professor')->update($prof_id,$prof);
+             echo($prof_id);
              return;
              return redirect('/professor');
-             DB::table('professor')->update($prof_id,$prof);
+             Professor::update($prof_id, $prof);
+             
     
   }
 

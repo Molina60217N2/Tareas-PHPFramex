@@ -9,14 +9,23 @@
   <link rel="stylesheet" href="../../css/global.css" />
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-{{#book}}
 
 <body>
   <header class="py-8 px-4 mx-auto max-w-xl lg:py-16 lg:px-6">
     <div class="mx-auto text-center mb-8 lg:mb-16">
       <h2 class="mb-4 text-5xl tracking-light font-extrabold text-white">
+        {{#show}}
+          {{title}}
+        {{/show}}
 
-        {{title}}
+        {{#create}}
+          Creación de Libro
+        {{/create}}
+
+        {{#edit}}
+          Edición de Libro
+        {{/edit}}
+        
 
       </h2>
     </div>
@@ -32,42 +41,136 @@
       </a>
     </nav>
   </header>
+{{#book}}
+  {{#show}}
+    <article class="max-w-3xl mx-auto flex flex-col gap-10 mt-10 mb-10">
+  {{/show}}
 
-  <article class="max-w-3xl mx-auto flex flex-col gap-10 mt-10">
+  {{#create}}
+    <form class="max-w-3xl mx-auto flex flex-col gap-10 mt-10 mb-10" action="/book" method="POST">
+  {{/create}}
+
+  {{#edit}}
+    <form class="max-w-3xl mx-auto flex flex-col gap-10 mt-10 mb-10" action="/book/{{id}}" method="POST">
+      <input type="hidden" name="_method" value="PUT">
+  {{/edit}}
+
     <div class="flex flex-col gap-10 text-xl">
-      <h2 class="mb-4 text-2xl tracking-light font-bold text-white">
 
-        Título del Libro: {{title}}
+      <label for="title" class="mb-0 text-2xl tracking-light font-bold text-white">
+        Título del Libro:
+      </label>
 
-      </h2>
-      <a class="text-purple-700 underline" href="/author/{{author_id}}">
-        <p>
-          Autor: {{author_name}}
-        </p>
-      </a>
-      <a class="text-purple-700 underline" href="/publisher/{{publisher_id}}">
-        <p>
-          Editorial: {{publisher_name}}
-        </p>
-      </a>
-      <p>
-        Idioma: {{language}}
-      </p>
-      <p>
-        Cantidad de páginas: {{pages}}
-      </p>
+      <input type="text" {{#show}}readonly{{/show}} name="title" value="{{title}}">
+
+      <label for="Author" class="mb-0 text-2xl tracking-light font-bold text-white">
+        Autor del Libro:
+      </label>
+
+      {{#show}}
+      <input type="text" readonly name="title" value="{{author_name}}">
+      {{/show}}
+
+      {{#create}}
+        <select name="author_id">
+          <option value="" selected disabled hidde>Seleccione una opción</option>
+          {{#author}}
+            <option value="{{id}}">{{author}}</option>
+          {{/author}}
+        </select>
+      {{/create}}
+
+      {{#edit}}
+        <select name="author_id">
+          <option value="{{author_id}}">{{author_name}}</option>
+          {{#author}}
+            <option value="{{id}}">{{author}}</option>
+          {{/author}}
+        </select>
+      {{/edit}}
+
+      <label for="Publisher" class="mb-0 text-2xl tracking-light font-bold text-white">
+        Editorial del Libro:
+      </label>
+
+      {{#show}}
+        <input type="text" readonly name="title" value="{{publisher_name}}">
+      {{/show}}
+
+      {{#create}}
+        <select name="publisher_id">
+          <option value="" selected disabled hidde>Seleccione una opción</option>
+          {{#publisher}}
+            <option value="{{id}}">{{publisher}}</option>
+          {{/publisher}}
+        </select>
+      {{/create}}
+
+      {{#edit}}
+        <select name="publisher_id">
+          <option value="{{publisher_id}}" selected>{{publisher_name}}</option>
+          {{#publisher}}
+            <option value="{{id}}">{{publisher}}</option>
+          {{/publisher}}
+        </select>
+      {{/edit}}
+
+      <label for="title" class="mb-0 text-2xl tracking-light font-bold text-white">
+        Idioma del Libro:
+      </label>
+
+      <input type="text" {{#show}}readonly{{/show}} name="language" value="{{language}}">
+
+      <label for="title" class="mb-0 text-2xl tracking-light font-bold text-white">
+        Cantidad de páginas del Libro:
+      </label>
+
+      <input type="number" {{#show}}readonly{{/show}} name="pages" value="{{pages}}">
 
     </div>
+
     <div class="flex flex-row gap-6">
-      <span class="text-xl font-semibold mr-2 px-2.5 py-0.5 rounded bg-green-200 text-green-900">Año: {{copyright}}</span>
-      <span class="text-xl font-semibold mr-2 px-2.5 py-0.5 rounded bg-green-200 text-green-900">Edición: {{edition}}</span>
-    </div>
-    <p class="my-2 font-bold tracking-tight Itext-white">
 
-    </p>
-  </article>
+      <label for="title" class="mb-0 text-2xl tracking-light font-bold text-white">
+        Año del Libro:
+      </label>
+
+      <input type="number" {{#show}}readonly{{/show}} name="copyright" value="{{copyright}}">
+
+      <label for="title" class="mb-0 text-2xl tracking-light font-bold text-white">
+        Edición del Libro:
+      </label>
+
+      <input type="text" {{#show}}readonly{{/show}} name="edition" value="{{edition}}">
+    </div>
+
+    {{#edit}}
+      <input class="inline-flex items-center px-4 py-2 bg-indigo-500 hover:bg-indigo-600 text-white text-sm font-medium rounded-md" type="submit" value="Update">
+    {{/edit}}
+
+    {{#create}}
+      <input class="inline-flex items-center px-4 py-2 bg-indigo-500 hover:bg-indigo-600 text-white text-sm font-medium rounded-md" type="submit" value="Create">
+    {{/create}}
+
+    {{#show}}
+      <a href="{{id}}/edit" class="inline-flex items-center px-4 py-2 bg-indigo-500 hover:bg-indigo-600 text-white text-sm font-medium rounded-md">Editar Registro</a>
+      <a href="{{id}}/delete" class="inline-flex items-center px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-sm font-medium rounded-md">Eliminar Registro</a>
+    {{/show}}
+
+  {{#show}}
+    </article>
+  {{/show}}
+
+  {{#create}}
+    </form>
+  {{/create}}
+
+  {{#edit}}
+   </form>
+  {{/edit}}
+  
+{{/book}}
 
 </body>
-{{/book}}
 
 </html>
