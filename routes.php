@@ -15,12 +15,12 @@ require_once('./controllers/PublisherController.php');
     // Route::get('/book/(:number)','BookController@show');
     
     //AUTHOR'S ROUTES
-    Route::get('/authors','AuthorController@index');
-    Route::get('/author/(:number)','AuthorController@show');
+    Route::resource('/author', 'AuthorController');
+    Route::get('/author/(:number)/delete','AuthorController@destroy');
 
     //PUBLISHER'S ROUTES
-    Route::get('/publishers','PublisherController@index');
-    Route::get('/publisher/(:number)','PublisherController@show');
+    Route::resource('/publisher','PublisherController');
+    Route::get('/publisher/(:number)/delete','PublisherController@destroy');
 
     //TESTING ROUTES
 
