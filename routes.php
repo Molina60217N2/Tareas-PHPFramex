@@ -22,6 +22,22 @@ require_once('./controllers/PublisherController.php');
     Route::resource('/publisher','PublisherController');
     Route::get('/publisher/(:number)/delete','PublisherController@destroy');
 
+      // Authentication Routes  
+    Route::get('login', 
+    'LoginController@showLoginForm');
+    Route::get('loginFails', 
+    'LoginController@LoginFails');           
+    Route::post('login', 
+            'LoginController@login');  
+    Route::get('logout', 'LoginController@logout');  
+
+    // Registration Routes  
+    Route::get('register', 
+    'RegisterController@showRegistrationForm');  
+    Route::post('register', 
+            'RegisterController@register');
+
+
     //TESTING ROUTES
 
     //Esta ruta se encarga de rutear automaticamente el CRUD

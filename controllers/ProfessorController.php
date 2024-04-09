@@ -8,7 +8,7 @@
     public function index() {  
       return view('professor/index',
        ['professors'=>Professor::all(),
-        'title'=>'Professors List']);
+        'title'=>'Professors List', 'login'=>Auth::check()]);
     }
 
     public function show($id) {

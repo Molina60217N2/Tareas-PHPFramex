@@ -19,7 +19,9 @@ class BookController extends Controller {
       }
         return view('book/index',
          ['books'=>$books,
-          'title'=>'Página principal de Libros',]);
+          'title'=>'Página principal de Libros',
+          'user'=>Cookie::get('userId'),
+          'login'=>Auth::check()]);
     }
       public function show($id) {
         $book = Book::find($id);
